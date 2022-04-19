@@ -1,8 +1,8 @@
-FROM node:9
+FROM centos:7
 WORKDIR /app
-COPY package.json /app
+ADD https://rpm.nodesource.com/setup_10.x
+RUN yum install nodejs
 RUN npm install
 RUN npm build
 COPY build /app
 EXPOSE 8080
-CMD [ "serve", "-s", "build" ]
