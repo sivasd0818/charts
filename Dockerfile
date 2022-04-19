@@ -1,8 +1,5 @@
 FROM centos:7
-WORKDIR /app
-ADD https://rpm.nodesource.com/setup_10.x
-RUN yum install nodejs
-RUN npm install
-RUN npm build
-COPY build /app
-EXPOSE 8080
+RUN yum update -y && yum install httpd httpd-tools -y
+CMD ["cp", "-R", "build/.", "/var/www/html/"]
+EXPOSE 80
+CMD ["/usr/sbin/httpd","-D","FOREGROUND"]
